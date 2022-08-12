@@ -22,8 +22,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Compilação
-      run: mvn -B compila --file pom.xml
-
-        
-        
-2fea5ff6-f920-436f-82c8-6b4fc10dfd60
+      run: mvn -B compile --file pom.xml
