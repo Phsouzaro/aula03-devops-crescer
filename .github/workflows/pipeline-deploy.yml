@@ -67,7 +67,7 @@ jobs:
       with:
         install: true
     - name: Login no Heroku
-      uses: docker/login-action@v2
+      uses: docker/login-action@v1
       with:
         registry: registry.heroku.com
         username: ${{ secrets.HEROKU_EMAIL }}
@@ -76,7 +76,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: registry.heroku.com/desafio_final_devops/web:latest
+        tags: registry.heroku.com/lab-devops-project/web:latest
 
   deploy:
     name: Publica ambiente Desenvolvimento
@@ -85,13 +85,13 @@ jobs:
     
     steps:
     - name: Login no Heroku
-      uses: docker/login-action@v2
+      uses: docker/login-action@v1
       with:
         registry: registry.heroku.com
         username: ${{ secrets.HEROKU_EMAIL }}
         password: ${{ secrets.HEROKU_API_KEY }}
     - name: Publicação
-      run: heroku container:release -a desafio_final_devops web 
+      run: heroku container:release -a lab-devops-project web 
       env:
         HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
