@@ -56,22 +56,23 @@ jobs:
     - name: Testes Unitários
       run: mvn -B test --file pom.xml
       
-  create-app:
-   name: Criar Web App no Heroku
-   needs: [code-quality, tests]
-   runs-on: ubuntu-latest
-   steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "lab-devops-project" #Must be unique in Heroku
-          heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          usedocker: true
+  #create-app:
+   #name: Criar Web App no Heroku
+   #needs: [code-quality, tests]
+   #runs-on: ubuntu-latest
+   #steps:
+      #- uses: actions/checkout@v2
+      #- uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        #with:
+          #heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          #heroku_app_name: "lab-devops-project" #Must be unique in Heroku
+          #heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          #usedocker: true
            
   push-image:
     name: Enviar imagem Heroku
-    needs: [create-app]
+    #needs: [create-app]
+    needs: [ code-quality, tests ]
     runs-on: ubuntu-latest
     
     steps:
