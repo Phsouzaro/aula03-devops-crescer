@@ -70,8 +70,8 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: registry.heroku.com
-        username: pedro.rodrigues@cwi.com.br
-        password: f99ce2e0-4ab6-402a-a713-060daee49ceb
+        username: ${{ secrets.HEROKU_EMAIL }}
+        password: ${{ secrets.HEROKU_API_KEY }}
     - name: Criação e envio da imagem
       uses: docker/build-push-action@v3
       with:
@@ -88,10 +88,10 @@ jobs:
       uses: docker/login-action@v2
       with:
         registry: registry.heroku.com
-        username: pedro.rodrigues@cwi.com.br
-        password: f99ce2e0-4ab6-402a-a713-060daee49ceb
+        username: ${{ secrets.HEROKU_EMAIL }}
+        password: ${{ secrets.HEROKU_API_KEY }}
     - name: Publicação
       run: heroku container:release -a lab-devops-project web 
       env:
-        HEROKU_EMAIL: pedro.rodrigues@cwi.com.br
-        HEROKU_API_KEY: f99ce2e0-4ab6-402a-a713-060daee49ceb
+        HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
